@@ -1,0 +1,17 @@
+{
+  "name": "ignite-api-02",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.3",
+    "tsx": "^3.12.7",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "fastify": "^4.17.0"
+  }
+}
