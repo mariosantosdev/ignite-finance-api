@@ -4,6 +4,12 @@ import { createTransactionBodySchema } from '../validators/transactions'
 import { randomUUID } from 'node:crypto'
 
 export async function transactionsRoutes(app: FastifyInstance) {
+  app.get('/', async () => {
+    const transactions = await knex('transactions').select()
+
+    return { transactions }
+  })
+
   app.post('/', async (request, reply) => {
     const { title, amount, type } = createTransactionBodySchema.parse(
       request.body,
