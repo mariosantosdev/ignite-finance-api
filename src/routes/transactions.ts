@@ -1,6 +1,9 @@
 import { FastifyInstance } from 'fastify'
 import { knex } from '../database'
-import { createTransactionBodySchema } from '../validators/transactions'
+import {
+  createTransactionBodySchema,
+  getTransactionParamsSchema,
+} from '../validators/transactions'
 import { randomUUID } from 'node:crypto'
 
 export async function transactionsRoutes(app: FastifyInstance) {
@@ -8,6 +11,14 @@ export async function transactionsRoutes(app: FastifyInstance) {
     const transactions = await knex('transactions').select()
 
     return { transactions }
+  })
+
+  app.get('/:id', async (request) => {
+    const { id } = getTransactionParamsSchema.parse(request.params)
+
+    const transaction = await knex('transactions').where('id', id).first()
+
+    return { transaction }
   })
 
   app.post('/', async (request, reply) => {
