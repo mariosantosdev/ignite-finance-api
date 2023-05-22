@@ -1,9 +1,10 @@
 import fastify from 'fastify'
 import { env } from './validators/env'
+import { transactionsRoutes } from './routes/transactions'
 
 const server = fastify()
 
-server.get('/', () => ({ hello: 'world' }))
+server.register(transactionsRoutes, { prefix: 'transactions' })
 
 server
   .listen({ port: env.PORT })
